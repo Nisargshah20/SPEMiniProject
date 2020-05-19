@@ -1,0 +1,5 @@
+com/spe/service/UserService.class
+com/spe/model/User.class
+com/spe/controller/UserController.class
+com/spe/repository/UserRepository.class
+com/spe/Application.class
