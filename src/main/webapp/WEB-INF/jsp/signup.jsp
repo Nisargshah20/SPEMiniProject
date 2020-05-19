@@ -12,39 +12,39 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script type="text/javascript">
-        function signupuser()
-        {
-            e = document.getElementById("email").value;
-            p1 = document.getElementById("password").value;
-            p2 = document.getElementById("confirmpassword").value;
-            un = document.getElementById("username").value;
-            if(e == "" || p1=="" || p2 == "" || un == ""){
-                alert("Fill all fields.");
-                return false;
-            }
-            else if(e.endsWith("@iiitb.org")==true)
-            {
-                if(p1 == p2)
-                {
-                    //window.location.href = "html/login.html";
-                    return true;
-                }
-                else
-                {
-                    alert("Password did not match!");
-                    document.getElementById("password").value = "";
-                    document.getElementById("confirmpassword").value = "";
-                    return false;
-                }
-
-            }
-            else
-            {
-                document.getElementById("email").value = "";
-                alert("Enter valid email!");
-                return false;
-            }
-        }
+    function signupuser()
+    {
+    	e = document.getElementById("email").value;
+    	p1 = document.getElementById("password").value;
+    	p2 = document.getElementById("confirmpassword").value;
+    	un = document.getElementById("username").value;
+    	if(e == "" || p1=="" || p2 == "" || un == ""){
+    		alert("Fill all fields.");
+    		return false;
+    	}
+    	else if(e.endsWith("@iiitb.org")==true)
+    	{
+    		if(p1 == p2)
+    		{
+    				//window.location.href = "html/login.html";
+    			return true;
+    		}
+    		else
+    		{
+    			 alert("Password did not match!");
+    			 document.getElementById("password").value = "";
+    			 document.getElementById("confirmpassword").value = "";
+    			 return false;
+    		}
+    		
+    	}
+    	else
+    	{
+    		document.getElementById("email").value = "";
+    		alert("Enter valid email!");
+    		return false;
+    	}
+    }
     </script>
     <style type="text/css">
         body
@@ -83,24 +83,28 @@
 <body>
 
 <div class="login-form">
-    <form id="signup" action="/signup" modelAttribute="signup" onsubmit="return signupuser()" method="post">
+    <form id="signup" action="/signup" onsubmit="return signupuser()" method="post">
+    	<div style="color: darkorange">${result}</div>
         <h2 class="text-center">Welcome</h2>
-        <img src = "iiitb_logo.jpg" width=200 height=150 class="center">
+        <img src = "/iiitb_logo.jpg" width=200 height=150 class="center">
         <br></br>
         <div class="form-group">
-            <input type="text" path="email" id="email" class="form-control" placeholder="Email">
+            <input type="text" name="email" id="email" class="form-control" placeholder="Email">
         </div>
         <div class="form-group">
-            <input type="password" path="password" id="password" class="form-control" placeholder="Password">
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password">
         </div>
         <div class="form-group">
             <input type="password" id="confirmpassword" class="form-control" placeholder="Confirm Password">
         </div>
         <div class="form-group">
-            <input type="text" path="username" id="username" class="form-control" placeholder="Username">
+            <input type="text" name="username" id="username" class="form-control" placeholder="Username">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        </div>
+        <div class="form-group" align=center>
+            <span class="psw">Already Have an account?<a href="/index">Login</a></span>
         </div>
     </form>
 

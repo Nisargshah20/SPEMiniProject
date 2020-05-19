@@ -48,15 +48,16 @@
 <body>
 
 <div class="login-form">
-    <form id="index" method="post" action="/index" modelAttribute="index">
+    <form id="index" method="post" action="/index">
+    	<div style="color: darkorange">${result}</div>
         <h2 class="text-center">Welcome</h2>
         <img src = "iiitb_logo.jpg" width=200 height=150 class="center">
         <br></br>
         <div class="form-group">
-            <input type="text" path="email" id="email" class="form-control" placeholder="Email" required>
+            <input type="text" name="username" id="email" class="form-control" placeholder="Username" required>
         </div>
         <div class="form-group">
-            <input type="password" path="password" id="password" class="form-control" placeholder="Password" required>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
         </div>
         <div class="form-group">
             <button type="submit" id="submit" class="btn btn-primary btn-block">Log in</button>

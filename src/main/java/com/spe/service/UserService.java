@@ -12,9 +12,9 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    boolean doesUserExists(User user)
+    public boolean doesUserExists(String username)
     {
-        User users = userRepository.findByEmail(user.getEmail());
+        User users = userRepository.findByUsername(username);
         return users == null ? false : true;
     }
 
