@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -10,7 +12,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="javascript/login.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <c:if test="${not empty result}">
+        <script type="text/javascript">
+            window.addEventListener("load",function(){
+                alert("${result}");
+            })
+        </script>
+    </c:if>
     <style type="text/css">
         body
         {
@@ -49,7 +58,6 @@
 
 <div class="login-form">
     <form id="index" method="post" action="/index">
-    	<div style="color: darkorange">${result}</div>
         <h2 class="text-center">Welcome</h2>
         <img src = "iiitb_logo.jpg" width=200 height=150 class="center">
         <br></br>

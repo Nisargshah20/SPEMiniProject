@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -11,41 +12,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <script type="text/javascript">
-    function signupuser()
-    {
-    	e = document.getElementById("email").value;
-    	p1 = document.getElementById("password").value;
-    	p2 = document.getElementById("confirmpassword").value;
-    	un = document.getElementById("username").value;
-    	if(e == "" || p1=="" || p2 == "" || un == ""){
-    		alert("Fill all fields.");
-    		return false;
-    	}
-    	else if(e.endsWith("@iiitb.org")==true)
-    	{
-    		if(p1 == p2)
-    		{
-    				//window.location.href = "html/login.html";
-    			return true;
-    		}
-    		else
-    		{
-    			 alert("Password did not match!");
-    			 document.getElementById("password").value = "";
-    			 document.getElementById("confirmpassword").value = "";
-    			 return false;
-    		}
-    		
-    	}
-    	else
-    	{
-    		document.getElementById("email").value = "";
-    		alert("Enter valid email!");
-    		return false;
-    	}
-    }
-    </script>
+    <script type="text/javascript" src="js/signup.js"></script>
+    <c:if test="${not empty result}">
+        <script type="text/javascript">
+            window.addEventListener("load",function(){
+                alert("${result}");
+            })
+        </script>
+    </c:if>
     <style type="text/css">
         body
         {
@@ -79,14 +53,14 @@
             width: 200px;
         }
     </style>
+
 </head>
 <body>
 
 <div class="login-form">
     <form id="signup" action="/signup" onsubmit="return signupuser()" method="post">
-    	<div style="color: darkorange">${result}</div>
         <h2 class="text-center">Welcome</h2>
-        <img src = "/iiitb_logo.jpg" width=200 height=150 class="center">
+        <img src = "iiitb_logo.jpg" width=200 height=150 class="center">
         <br></br>
         <div class="form-group">
             <input type="text" name="email" id="email" class="form-control" placeholder="Email">

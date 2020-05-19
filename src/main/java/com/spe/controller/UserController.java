@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value= {"/", "/index"}, method=RequestMethod.GET)
+    @RequestMapping(value= {"/index"}, method=RequestMethod.GET)
     public ModelAndView login() {
         return new ModelAndView("index");
     }
@@ -76,7 +76,7 @@ public class UserController {
         	User user = userService.findUserByUsername(username);
         	if(password.equals(user.getPassword())){
         		session.setAttribute("username", username);
-        		model = new ModelAndView("redirect:/home/home");
+        		model = new ModelAndView("home");
         	}else {
         		model = new ModelAndView("index");
                 model.addObject("result","Password is invalid");
