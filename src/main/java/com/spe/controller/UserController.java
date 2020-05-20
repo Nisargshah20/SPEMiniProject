@@ -22,12 +22,20 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value= {"/index"}, method=RequestMethod.GET)
-    public ModelAndView login() {
+    public ModelAndView login(HttpSession session) {
+        if(session.getAttribute("username")!=null){
+            ModelAndView model = new ModelAndView("redirect:/home");
+            return model;
+        }
         return new ModelAndView("index");
     }
 
     @RequestMapping(value= {"/signup"}, method=RequestMethod.GET)
-    public ModelAndView signup() {
+    public ModelAndView signup(HttpSession session) {
+        if(session.getAttribute("username")!=null){
+            ModelAndView model = new ModelAndView("redirect:/home");
+            return model;
+        }
         return new ModelAndView("signup");
     }
 
@@ -65,7 +73,7 @@ public class UserController {
     }
     
     @RequestMapping(value= {"/index"}, method=RequestMethod.POST)
-    public ModelAndView checkUser(@RequestParam("username")String username, @RequestParam("password")String password,  HttpSession session) {
+    public ModelAndView checkUser(@RequestParam("username")String username, @RequestParam("password")String password,  HttpSession session,RedirectAttributes redirectAttributes) {
         ModelAndView model = new ModelAndView();
         boolean userExists = userService.doesUserExists(username);
 
@@ -76,7 +84,9 @@ public class UserController {
         	User user = userService.findUserByUsername(username);
         	if(password.equals(user.getPassword())){
         		session.setAttribute("username", username);
-        		model = new ModelAndView("home");
+        		session.setAttribute("email",user.getEmail());
+        		session.setAttribute("userid",user.getId());
+        		model = new ModelAndView("redirect:/home");
         	}else {
         		model = new ModelAndView("index");
                 model.addObject("result","Password is invalid");
