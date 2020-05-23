@@ -39,13 +39,13 @@ public class UserController {
         return new ModelAndView("signup");
     }
 
-   /* @RequestMapping(value= {"/home"}, method=RequestMethod.GET)
-    public ModelAndView home() {
-        ModelAndView model = new ModelAndView();
-
-        model.setViewName("html/home");
-        return model;
-    }*/
+    @RequestMapping(value= {"/logout"}, method=RequestMethod.GET)
+    public ModelAndView logout(HttpSession session) {
+        if(session.getAttribute("username")!=null){
+            session.invalidate();
+        }
+        return new ModelAndView("redirect:index");
+    }
 
     @RequestMapping(value= {"/signup"}, method=RequestMethod.POST)
     public ModelAndView createUser(@RequestParam("username")String username,@RequestParam("password")String password,@RequestParam("email")String email) {

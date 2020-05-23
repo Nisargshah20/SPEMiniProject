@@ -3,31 +3,37 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" type="text/css" href="css/home.css"/>
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script type="text/javascript" src="js/home.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/home.css"/>
+        <script type="text/javascript" src="js/home.js"></script>
 		<title>
 			Home
 		</title>
 	</head>
 	<body>
 
-	<script type="text/javascript" src="js/home.js">
-
-	</script>
 		<div class="topnav">
-		  <a id="problems_list.html" class="active">Problems</a>
-		  <a id="upcoming_contests.html" onclick="myfun('upcoming_contests.html')">Upcoming Contests</a>
-		  <a id="leaderboard.html" onclick="myfun('leaderboard.html')">Leaderboard</a>
-		  <a id="discussion.html" onclick="myfun('discussion.html')">Discussion</a>
-		  <a id="submitproblem.html" onclick="myfun('submitproblem.html')">Create Problem</a>
-		  <a id="hostcontest.html" onclick="myfun('hostcontest.html')">Host Contest</a>
-		  <a id="hello">Hello ${username}</a>
+		  <a id="problems_list" href="home" class="active">Problems</a>
+		  <a id="upcoming_contests" href="upcoming_contests">Upcoming Contests</a>
+		  <a id="leaderboard" href="leaderboard"> Leaderboard</a>
+		  <a id="discussion" href="discussion" >Discussion</a>
+		  <a id="submitproblem" href="submitproblem" >Create Problem</a>
+		  <a id="hostcontest" href="hostcontest">Host Contest</a>
+			<div class="dropdown">
+				<button class="dropbtn">${username}
+					<i class="fa fa-caret-down"></i>
+				</button>
+				<div class="dropdown-content">
+					<a>Account</a>
+					<a href="/logout">Logout</a>
+				</div>
+			</div>
 		</div>
 		<br/>
 		<br/>
+        <div id="table1">
 		<table align="center" id = "problems" width="400px">
 			<thead>
 			<tr>
@@ -58,6 +64,7 @@
 			</c:forEach>
 			</tbody>
 		</table>
+        </div>
 	</body>
 </html>
 
