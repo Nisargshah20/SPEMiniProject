@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>1. Check If All 1's Are at Least Length K Places Away</h2>
+Given an array nums of 0s and 1s and an integer k, return True if all 1's are at least k places away from each other, otherwise return False.<br />
+
+<h3>Input :</h3>
+First Line contains t which represents number of testcases. For each testcase there are two lines,first contains n,k which represents size of the array and maximum distance respectively and the second line contains n integers.</br>
+<h3>Output :</h3>
+
+For each testcase print 1 if all 1 are atleast k distance away from each other else print 0.</br> 
+<br/>
+Example 1:<br/>
+<img src="1.1.png"><br/>
+Input: nums = [1,0,0,0,1,0,0,1], k = 2<br/>
+Output: true</br>
+Explanation: Each of the 1s are at least 2 places away from each other.<br/>
+<br/>
+Example 2:<br/>
+<img src="1.2.png"><br/>
+Input: nums = [1,0,0,1,0,1], k = 2<br/>
+Output: false</br>
+Explanation: The second 1 and third 1 are only one apart from each other.<br/>
+<br/>
+Example 3:<br/>
+Input: nums = [1,1,1,1,1], k = 0<br/>
+Output: true<br/>
+<br/>
+Example 4:<br/>
+Input: nums = [0,1,0,1], k = 1<br/>
+Output: true<br/>
+<br/>
+Constraints:<br/>
+1<= t <= 100<br/>
+1 <= nums.length <= 10^5<br/>
+0 <= k <= nums.length<br/>
+nums[i] is 0 or 1<br/>
+</body>
+</html>
+
