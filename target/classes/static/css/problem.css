@@ -46,7 +46,7 @@
 	
 	.bottom {
 		bottom: 0px;
-		position:fixed;
+		position:absolute;
 		width:50%;
 	}
 	
@@ -89,11 +89,7 @@
 	.collapse {
 	  display:none;
 	}
-	span {
-    color: green;
-	font-size:17px;
-	}
-	
+
 	.ds{
 		font-size:50px;
 	}

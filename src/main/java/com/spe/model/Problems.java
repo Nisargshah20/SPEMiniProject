@@ -8,7 +8,7 @@ public class Problems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="pid",nullable=false,updatable=false)
-    private Long pid;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -26,11 +26,11 @@ public class Problems {
     private Long solved;
 
     public Long getId() {
-        return pid;
+        return id;
     }
 
-    public void setId(Long pid) {
-        this.pid = pid;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

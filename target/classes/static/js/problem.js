@@ -17,9 +17,15 @@
 			document.getElementById(lang).className = "active";
 		}
 		function testfn() {
+			var innerDoc;
+			var iframe;
 			up();
 			document.getElementById("test").className = "active";
-			
+			iframe = document.getElementById("editor1");
+			innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+			document.getElementById("maincontent").value = innerDoc.getElementById("content1").value;
+			document.getElementById("form").submit();
+
 		}
 		function opposite() {
 			if(document.getElementById("arrow").className == "arrow down")down();
@@ -37,12 +43,13 @@
 			document.getElementById("error").className = "row bot collapse";
 			document.getElementById("inputoutput").className = "row bot collapse";
 		}
-		var question = "Problems/1/";
+		var question = "Problems/";
 		var curr_right_page = "question.html";
-		function rightcontroller(v){
+		function rightcontroller(v,pid){
 			document.getElementById(curr_right_page).className = "";
 			curr_right_page = v;
-			document.getElementById("myFrame").src = question+curr_right_page;
+			document.getElementById("myFrame").src = question+pid+'/'+curr_right_page;
+			console.log(document.getElementById("myFrame").src);
 			document.getElementById(curr_right_page).className = "active";
 			document.getElementById("myFrame").style.fontSize = "50pt";
 		}

@@ -24,7 +24,7 @@
 		  <a id="discussion.html" onclick="myfun('discussion.html')">Discussion</a>
 		  <a id="submitproblem.html" onclick="myfun('submitproblem.html')">Create Problem</a>
 		  <a id="hostcontest.html" onclick="myfun('hostcontest.html')">Host Contest</a>
-		  <b id="username" align="right">Hello ${username}</b>
+		  <a id="hello">Hello ${username}</a>
 		</div>
 		<br/>
 		<br/>
@@ -50,7 +50,7 @@
 				<c:set var="accuracy"  value="${(item.solved / item.attempted)*100}"/>
 				<tr >
 					<td>${item.id}</td>
-					<td>${item.name}</td>
+					<td><a href="/problems?id=${item.id}" style="text-decoration: none">${item.name}</a></td>
 					<td>${item.difficulty}</td>
 					<td>${item.topic}</td>
 					<td>${accuracy}%</td>
