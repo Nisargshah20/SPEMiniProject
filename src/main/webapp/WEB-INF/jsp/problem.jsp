@@ -7,7 +7,13 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css/problem.css">
-		<script type="text/javascript" src="js/problem.js"></script>
+		<script type="text/javascript" src="js/problem.js">
+		</script>
+		<script>
+			iframe = document.getElementById("editor1");
+			innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+			innerDoc.getElementById("editor").setvalue(${code});
+		</script>
 		<title>
 			Problem
 		</title>
@@ -37,17 +43,17 @@
 			 <div class="collapse" id="inputoutput">
 			  <div class="column">
 					<h3>Input</h3>
-					<textarea class="input" name="input" cols="35%" rows="7%"></textarea>
+					<textarea class="input" name="input" cols="59%" rows="10%"></textarea>
 			  </div>
 			  <div class="column">
 					<h3>Output</h3>
-					<textarea class="input" cols="35%" rows="7%" readonly></textarea>
+					<textarea class="input" cols="59%" rows="10%" readonly></textarea>
 			   </div>
 			</div>
 			<div class="collapse" id="error">
 				<div class="column">
 					<h3>Error</h3>
-					<textarea class="input" cols="74" rows="7"></textarea>
+					<textarea class="input" cols="125%" rows="10%"></textarea>
 			    </div>
 			</div>
 			

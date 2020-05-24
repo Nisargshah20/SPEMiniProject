@@ -15,6 +15,16 @@ public class Leaderboard {
     @Column(name="points")
     private Long points;
 
+    public Leaderboard(){};
+
+    public Leaderboard(String username) {
+        this.username = username;
+        this.easy = 0L;
+        this.hard = 0L;
+        this.medium = 0L;
+        this.points = 0L;
+    }
+
     public String getUsername() {
         return username;
     }

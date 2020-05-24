@@ -1,6 +1,7 @@
 package com.spe.service;
 
 import com.spe.model.Leaderboard;
+import com.spe.model.User;
 import com.spe.repository.LeaderboardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,5 +15,9 @@ public class LeaderboardService {
 
     public List<Leaderboard> getLeaderboard(){
         return leaderboardRepository.findByOrderByPointsDesc();
+    }
+
+    public void saveLeaderboard(Leaderboard leaderboard) {
+        leaderboardRepository.save(leaderboard);
     }
 }

@@ -1,5 +1,7 @@
 package com.spe.controller;
 
+import com.spe.model.Leaderboard;
+import com.spe.service.LeaderboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private LeaderboardService leaderboardService;
 
     @RequestMapping(value= {"/index"}, method=RequestMethod.GET)
     public ModelAndView login(HttpSession session) {
@@ -67,6 +71,8 @@ public class UserController {
             userService.saveUser(user);
             model = new ModelAndView("index");
             model.addObject("result","Registered Successfully");
+            Leaderboard leaderboard = new Leaderboard(user.getUsername());
+            leaderboardService.saveLeaderboard(leaderboard);
         }
 
         return model;

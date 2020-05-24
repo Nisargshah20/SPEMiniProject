@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface LeaderboardRepository extends CrudRepository<Leaderboard,Long> {
     List<Leaderboard> findByOrderByPointsDesc();
+
 }
