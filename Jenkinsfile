@@ -8,49 +8,34 @@ pipeline {
       skipDefaultCheckout(true)
   }
   stages {
-    stage('Clone GIT Repository') {
-          steps{
-                logstash{
-                    git 'https://github.com/Nisargshah20/SPEMiniProject.git'
-                }
-          }
-    }
     stage('Clean') {
         steps{
-            logstash{
              sh 'mvn clean'
              echo "clean"
-             }
         }
     }
 
     stage('Compile') {
         steps{
-            logstash{
              sh 'mvn package'
              echo "compile"
-             }
         }
     }
     stage('Test') {
         steps{
-            logstash {
            sh 'mvn test'
            echo "test"
            }
-        }
     }
 
     stage('Deploy Image to Docker Hub') {
         steps{
-            logstash{
             script{
 
                dockerImage = docker.build registry + ":spe"
                docker.withRegistry( '', registryCredential){
                    dockerImage.push()
                }
-            }
             }
         }
     }
