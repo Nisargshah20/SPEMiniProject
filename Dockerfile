@@ -1,4 +1,4 @@
 FROM openjdk
-COPY target/SPEProject-1.0-SNAPSHOT.war /home
+COPY target/SPEProject.war /home
 WORKDIR /home
-CMD ["java" , "-jar" , "SPEProject-1.0-SNAPSHOT.war"]
+CMD ["java" , "-jar" , "SPEProject.war"]
