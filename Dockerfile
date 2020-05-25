@@ -1,7 +1,4 @@
-FROM tomcat:7-jre8-alpine
-
-# copy the WAR bundle to tomcat
-COPY /target/SPEProject.war /usr/local/tomcat/webapps/SPEProject.war
-
-# command to run
-CMD ["catalina.sh", "run"]
+FROM openjdk
+EXPOSE 8085
+ADD target/SPEProject.war SPEProject.war
+ENTRYPOINT ["java" , "-jar" , "SPEProject.war"]
