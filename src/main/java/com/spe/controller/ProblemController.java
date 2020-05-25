@@ -1,22 +1,22 @@
 package com.spe.controller;
 
-import org.apache.tomcat.jni.Proc;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.google.gson.Gson;
+import com.spe.model.ReturnOutput;
+import com.spe.model.Test;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.*;
-import org.apache.commons.io.FileUtils;
+import java.nio.file.Files;
+import java.util.Arrays;
 
 @RestController
 public class ProblemController {
+
+    Gson gson = new Gson();
 
     @RequestMapping(value = {"/problems"})
     public ModelAndView problem(@RequestParam(value = "id") String id, HttpSession session, RedirectAttributes redirectAttributes){
@@ -25,23 +25,24 @@ public class ProblemController {
             redirectAttributes.addFlashAttribute("result","Can't access the page you requested need to Login first");
             return model;
         }
-        System.out.println(id);
         ModelAndView model = new ModelAndView("problem");
         session.setAttribute("id",id);
         model.addObject("pid",id);
         return model;
     }
 
-    @RequestMapping(value = {"/submit"},method = RequestMethod.POST)
-    public ModelAndView submit(@RequestParam(value = "content") String content, @RequestParam(value = "input") String input, HttpSession session, RedirectAttributes redirectAttributes) throws IOException, InterruptedException {
+    /*@RequestMapping(value = {"/submit"},method = RequestMethod.POST)
+    public ModelAndView submit(@RequestParam(value = "content") String content, @RequestParam(value = "input") String input,@RequestParam(value="test") String test1,HttpSession session, RedirectAttributes redirectAttributes) throws IOException, InterruptedException {
         if(session.getAttribute("username")==null){
             ModelAndView model = new ModelAndView("redirect:index");
             redirectAttributes.addFlashAttribute("result","Can't access the page you requested need to Login first");
             return model;
         }
-        System.out.println(content);
         String username = (String) session.getAttribute("username");
         String id = (String) session.getAttribute("id");
+        ModelAndView model = new ModelAndView("redirect:/problems?id="+id);
+
+        System.out.println(content);
         String path = "./src/main/resources/"+username;
         File file = new File(path);
         if(!file.exists())
@@ -64,17 +65,193 @@ public class ProblemController {
         String ue_path = "src/main/resources/" + username + "/" + id + "/usererror.txt";
         String uo_path = "src/main/resources/" + username + "/" + id + "/useroutput.txt";
         String ucode_path = "src/main/resources/" + username + "/" + id + "/userprogram.cpp";
+        String i_path = "src/main/resource/Problems/" + id + "/input";
+        String o_path = "src/main/resource/Problems/" + id + "/output";
+        System.out.println(test1);
+        if(test1.equals("1")){
+            String[] cmd = { "sh", "test.sh", ucode_path,ui_path,ue_path,uo_path};
+            Process p = Runtime.getRuntime().exec(cmd);
+            File errorfile = new File(ue_path);
+            if (errorfile.length() == 0)
+            {
+                InputStream is = new FileInputStream(uo_path);
+                BufferedReader buf = new BufferedReader(new InputStreamReader(is));
 
-        String cmd = "touch " + ue_path;
-        Process a = Runtime.getRuntime().exec(cmd);
-        a.waitFor();
-        String cmd1 = "g++ " + ucode_path + " < " + ui_path + " 2 > " + ue_path;
-       /* String cmd2 = "g++ " + ucode_path + " -o " + "tc";
-        String cmd3 = "./tc < " + ui_path + " > " + uo_path;*/
-        Process b = Runtime.getRuntime().exec(cmd1);
-        /*Runtime.getRuntime().exec(cmd2);
-        Runtime.getRuntime().exec(cmd3);*/
+                String line = buf.readLine();
+                StringBuilder sb = new StringBuilder();
 
-        return new ModelAndView("redirect:/problems?id="+id);
+                while(line != null){
+                    sb.append(line).append("\n");
+                    line = buf.readLine();
+                }
+
+                String fileAsString = sb.toString();
+                model.addObject("output",fileAsString);
+                model.addObject("status","success");
+            }
+            else{
+                InputStream is = new FileInputStream(ue_path);
+                BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+
+                String line = buf.readLine();
+                StringBuilder sb = new StringBuilder();
+
+                while(line != null){
+                    sb.append(line).append("\n");
+                    line = buf.readLine();
+                }
+
+                String fileAsString = sb.toString();
+                model.addObject("output",fileAsString);
+                model.addObject("status","failed");
+            }
+        }*//*else{
+            String[] cmd = { "sh", "test.sh", ucode_path,i_path,ue_path,uo_path};
+            Process p = Runtime.getRuntime().exec(cmd);
+            File errorfile = new File(ue_path);
+            if (errorfile.length() == 0)
+            {
+                File useroutputfile = new File(uo_path);
+                return useroutputfile with success status;
+            }
+            else return errorfile with error status;
+        }*//*
+        return model;
+    }*/
+
+    @RequestMapping(value = "/test",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String OnTest(@RequestBody Test test) throws IOException, InterruptedException {
+        String username = test.getUsername();
+        String id = test.getPid();
+        System.out.println(username);
+        String path = "./src/main/resources/" + username;
+        File file = new File(path);
+        if (!file.exists())
+            file.mkdir();
+        path = "./src/main/resources/" + username + '/' + id;
+        file = new File(path);
+        if (!file.exists())
+            file.mkdir();
+        File code = new File(path + '/' + "userprogram.cpp");
+        FileWriter writer = new FileWriter(code);
+        writer.write(test.getProgram());
+        writer.close();
+        File input = new File(path + '/' + "userinput.txt");
+        writer = new FileWriter(input);
+        writer.write(test.getInput());
+        writer.close();
+
+        String ui_path = "src/main/resources/" + username + "/" + id + "/userinput.txt";
+        String ue_path = "src/main/resources/" + username + "/" + id + "/usererror.txt";
+        String uo_path = "src/main/resources/" + username + "/" + id + "/useroutput.txt";
+        String ucode_path = "src/main/resources/" + username + "/" + id + "/userprogram.cpp";
+        String i_path = "src/main/resource/Problems/" + id + "/input";
+        String o_path = "src/main/resource/Problems/" + id + "/output";
+
+        String[] cmd = {"sh", "test.sh", ucode_path, ui_path, ue_path, uo_path};
+        Process p = Runtime.getRuntime().exec(cmd);
+        p.waitFor();
+        File errorfile = new File(ue_path);
+        ReturnOutput returnOutput = new ReturnOutput();
+        if (errorfile.length() == 0) {
+            InputStream is = new FileInputStream(uo_path);
+            BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+
+            String line = buf.readLine();
+            StringBuilder sb = new StringBuilder();
+
+            while (line != null) {
+                sb.append(line).append("\n");
+                line = buf.readLine();
+            }
+            String fileAsString = sb.toString();
+            returnOutput.setStatus("success");
+            returnOutput.setOutput(fileAsString);
+        }else{
+            InputStream is = new FileInputStream(ue_path);
+            BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+
+            String line = buf.readLine();
+            StringBuilder sb = new StringBuilder();
+
+            while(line != null){
+                sb.append(line).append("\n");
+                line = buf.readLine();
+            }
+
+            String fileAsString = sb.toString();
+            returnOutput.setStatus("failed");
+            returnOutput.setOutput(fileAsString);
+        }
+        return gson.toJson(returnOutput);
+    }
+
+    @RequestMapping(value = "/submit",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String OnSubmit(@RequestBody Test test) throws IOException, InterruptedException {
+        String username = test.getUsername();
+        String id = test.getPid();
+        System.out.println(username);
+        String path = "./src/main/resources/" + username;
+        File file = new File(path);
+        if (!file.exists())
+            file.mkdir();
+        path = "./src/main/resources/" + username + '/' + id;
+        file = new File(path);
+        if (!file.exists())
+            file.mkdir();
+        File code = new File(path + '/' + "userprogram.cpp");
+        FileWriter writer = new FileWriter(code);
+        writer.write(test.getProgram());
+        writer.close();
+        File input = new File(path + '/' + "userinput.txt");
+        writer = new FileWriter(input);
+        writer.write(test.getInput());
+        writer.close();
+
+        String ui_path = "src/main/resources/" + username + "/" + id + "/userinput.txt";
+        String ue_path = "src/main/resources/" + username + "/" + id + "/usererror.txt";
+        String uo_path = "src/main/resources/" + username + "/" + id + "/useroutput.txt";
+        String ucode_path = "src/main/resources/" + username + "/" + id + "/userprogram.cpp";
+        String i_path = "src/main/resources/static/Problems/" + id + "/input.txt";
+        String o_path = "src/main/resources/static/Problems/" + id + "/output.txt";
+
+        String[] cmd = {"sh", "test.sh", ucode_path, i_path, ue_path, uo_path};
+        Process p = Runtime.getRuntime().exec(cmd);
+        p.waitFor();
+        File errorfile = new File(ue_path);
+        ReturnOutput returnOutput = new ReturnOutput();
+        if (errorfile.length() == 0) {
+            File useroutputfile = new File(uo_path);
+            File outputfile = new File(o_path);
+
+            byte[] first = Files.readAllBytes(useroutputfile.toPath());
+            byte[] second = Files.readAllBytes(outputfile.toPath());
+
+            boolean equal = Arrays.equals(first, second);
+            if (equal)
+            {
+                returnOutput.setStatus("success");
+            }
+            else
+            {
+                returnOutput.setStatus("wrongans");
+            }
+        }else{
+            InputStream is = new FileInputStream(ue_path);
+            BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+
+            String line = buf.readLine();
+            StringBuilder sb = new StringBuilder();
+
+            while(line != null){
+                sb.append(line).append("\n");
+                line = buf.readLine();
+            }
+
+            String fileAsString = sb.toString();
+            returnOutput.setStatus("failed");
+            returnOutput.setOutput(fileAsString);
+        }
+        return gson.toJson(returnOutput);
     }
 }
