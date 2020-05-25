@@ -5,7 +5,7 @@ using namespace std;
 bool kLengthApart(vector<int>& nums, int k) 
 {
         
-        int start = -1;
+        int start = -1
         for(int i=0;i<nums.size();i++)
         {
             if(nums[i]==1)
