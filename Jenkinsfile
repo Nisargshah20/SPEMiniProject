@@ -7,8 +7,8 @@ pipeline {
 
   stages {
     stage('Clean') {
-        logstash{
         steps{
+        logstash{
              sh 'mvn clean'
              echo "clean"
         }
@@ -16,8 +16,8 @@ pipeline {
     }
 
     stage('Compile') {
-        logstash{
         steps{
+        logstash{
              sh 'mvn package'
              echo "compile"
         }
