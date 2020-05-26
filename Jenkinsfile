@@ -7,27 +7,34 @@ pipeline {
 
   stages {
     stage('Clean') {
+        logstash{
         steps{
              sh 'mvn clean'
              echo "clean"
         }
+        }
     }
 
     stage('Compile') {
+        logstash{
         steps{
              sh 'mvn package'
              echo "compile"
         }
+        }
     }
     stage('Test') {
         steps{
-           sh 'mvn test'
-           echo "test"
+           logstash{
+            sh 'mvn test'
+            echo "test"
            }
+        }
     }
 
     stage('Deploy Image to Docker Hub') {
         steps{
+        logstash{
             script{
 
                dockerImage = docker.build registry + ":spe"
@@ -35,6 +42,7 @@ pipeline {
                    dockerImage.push()
                }
             }
+        }
         }
     }
     /* stage('Execute Rundeck job') {
