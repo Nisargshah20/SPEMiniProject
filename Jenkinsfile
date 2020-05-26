@@ -45,13 +45,13 @@ pipeline {
         }
         }
     }
-    /* stage('Execute Rundeck job') {
+     stage('Execute Rundeck job') {
              steps {
              logstash{
                script {
                  step([$class: "RundeckNotifier",
                        includeRundeckLogs: true,
-                       jobId: "eff9b87e-a8c7-4feb-8031-4f2222f5522f",
+                       jobId: "e52690ae-a6ec-47ac-95ef-9ce87e9f4829",
                        rundeckInstance: "rundeck",
                        shouldFailTheBuild: true,
                        shouldWaitForRundeckJob: true,
@@ -59,7 +59,7 @@ pipeline {
                }
                }
              }
-    } */
+    }
 
   }
 }
