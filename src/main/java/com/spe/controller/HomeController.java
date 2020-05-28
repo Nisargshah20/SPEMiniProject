@@ -70,17 +70,6 @@ public class HomeController {
         return model;
     }
 
-    @RequestMapping(value= {"/discussion"})
-    public ModelAndView discussion(HttpSession session, RedirectAttributes redirectAttributes) {
-        if(session.getAttribute("username")==null){
-            ModelAndView model = new ModelAndView("redirect:index");
-            redirectAttributes.addFlashAttribute("result","Can't access the page you requested need to Login first");
-            return model;
-        }
-        ModelAndView model = new ModelAndView("discussion");
-        return model;
-    }
-
     @RequestMapping(value= {"/leaderboard"})
     public ModelAndView leaderboard(HttpSession session, RedirectAttributes redirectAttributes) {
         if(session.getAttribute("username")==null){

@@ -44,6 +44,7 @@ function rightcontroller(v,pid){
 	document.getElementById("myFrame").style.fontSize = "50pt";
 }
 
+
 $(document).ready(function()
 {
 	$("#test").click(function()

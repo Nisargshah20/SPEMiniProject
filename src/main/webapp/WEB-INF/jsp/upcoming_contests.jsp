@@ -47,6 +47,24 @@
 			<th>Date</th>
 			<th>Length</th>
 		</tr>
+		<tr>
+			<td>IIITB Code</td>
+			<td>12:00</td>
+			<td>28/05/2020</td>
+			<td>2 hours</td>
+		</tr>
+		<tr>
+			<td>Snackdown</td>
+			<td>21:30</td>
+			<td>30/05/2020</td>
+			<td>2:30 hours</td>
+		</tr>
+		<tr>
+			<td>Hackathon</td>
+			<td>21:00</td>
+			<td>31/05/2020</td>
+			<td>3 hours</td>
+		</tr>
 	</table>
 </div>
 </body>

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 @RestController
@@ -28,6 +29,8 @@ public class ProblemController {
         ModelAndView model = new ModelAndView("problem");
         session.setAttribute("id",id);
         model.addObject("pid",id);
+        String current_dir_path = Paths.get("").toAbsolutePath().toString();
+        System.out.print(current_dir_path);
         return model;
     }
 

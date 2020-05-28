@@ -8,6 +8,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/home.css"/>
 	<script type="text/javascript" src="js/home.js"></script>
+	<script>
+		function addquestion(){
+			var newq = document.getElementById("q").cloneNode(true);
+			document.getElementById("t").appendChild(newq);
+
+		}
+		function removequestion(){
+
+			var tab = document.getElementById("t");
+			tab.removeChild(tab.lastChild);
+
+		}
+	</script>
 	<title>
 		Home
 	</title>
@@ -47,45 +60,27 @@
 		<input class="w3-inputa w3-border" name="last" type="time"></p>
 
 
-	<button style="width:120px;" onclick="addquestion()">Add Question</button>
+	<button onclick="addquestion()">Add Question</button>
+	<button onclick="removequestion()">Remove Question</button>
 	</br>
 	</br>
 
-	<table>
+	<table id="t">
 		<tr>
 			<colgroup>
-				<col span="1" style="width: 7%;">
 				<col span="1" style="width: 16%;">
 				<col span="1" style="width: 16%;">
 				<col span="1" style="width: 16%;">
 				<col span="1" style="width: 16%;">
 				<col span="1" style="width: 16%;">
 			</colgroup>
-			<th>Sr.No.</th>
 			<th>Time Limit</th>
 			<th>Question</th>
 			<th>Input</th>
 			<th>Output</th>
 			<th>Points</th>
 		</tr>
-		<tr>
-			<th>1</th>
-			<th> <input class="w3-inputa w3-border" type="number"></th>
-			<th> <input type="file"></th>
-			<th> <input type="file"></th>
-			<th> <input type="file"></th>
-			<th> <input class="w3-inputa w3-border" type="text"></th>
-		</tr>
-		<tr>
-			<th>2</th>
-			<th> <input class="w3-inputa w3-border" type="number"></th>
-			<th> <input type="file"></th>
-			<th> <input type="file"></th>
-			<th> <input type="file"></th>
-			<th> <input class="w3-inputa w3-border" type="text"></th>
-		</tr>
-		<tr>
-			<th>3</th>
+		<tr id="q">
 			<th> <input class="w3-inputa w3-border" type="number"></th>
 			<th> <input type="file"></th>
 			<th> <input type="file"></th>
@@ -95,7 +90,7 @@
 	</table>
 	</br>
 	</br>
-	<button style="width:120px;">Submit</button>
+	<button style="width:120px; height:30px;">Submit</button>
 </div>
 
 </body>

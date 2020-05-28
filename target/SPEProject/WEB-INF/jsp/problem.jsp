@@ -77,7 +77,7 @@
 		<a onclick="rightcontroller('discussion.html','${pid}')" id="discussion.html">Discussion</a>
 	</div>
 	<div>
-		<iframe src="Problems/${pid}/question.html" width="100%" onload="this.style.height=(this.contentDocument.body.scrollHeight+45) +'px';" id="myFrame"></iframe>
+		<iframe src="Problems/${pid}/question.html" width="100%" onload="this.style.height=(this.contentDocument.body.scrollHeight+800) +'px';" id="myFrame"></iframe>
 	</div>
 </div>
 
