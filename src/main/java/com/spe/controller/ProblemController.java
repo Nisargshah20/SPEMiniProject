@@ -41,11 +41,11 @@ public class ProblemController {
         String username = test.getUsername();
         String id = test.getPid();
         System.out.println(username);
-        String path = "./src/main/resources/" + username;
+        String path = username;
         File file = new File(path);
         if (!file.exists())
             file.mkdir();
-        path = "./src/main/resources/" + username + '/' + id;
+        path = username + '/' + id;
         file = new File(path);
         if (!file.exists())
             file.mkdir();
@@ -58,12 +58,12 @@ public class ProblemController {
         writer.write(test.getInput());
         writer.close();
 
-        String ui_path = "src/main/resources/" + username + "/" + id + "/userinput.txt";
-        String ue_path = "src/main/resources/" + username + "/" + id + "/usererror.txt";
-        String uo_path = "src/main/resources/" + username + "/" + id + "/useroutput.txt";
-        String ucode_path = "src/main/resources/" + username + "/" + id + "/userprogram.cpp";
-        String i_path = "src/main/resource/Problems/" + id + "/input";
-        String o_path = "src/main/resource/Problems/" + id + "/output";
+        String ui_path = username + "/" + id + "/userinput.txt";
+        String ue_path = username + "/" + id + "/usererror.txt";
+        String uo_path = username + "/" + id + "/useroutput.txt";
+        String ucode_path = username + "/" + id + "/userprogram.cpp";
+        String i_path = "Problems/" + id + "/input";
+        String o_path = "Problems/" + id + "/output";
 
         String[] cmd = {"sh", "test.sh", ucode_path, ui_path, ue_path, uo_path};
         Process p = Runtime.getRuntime().exec(cmd);
