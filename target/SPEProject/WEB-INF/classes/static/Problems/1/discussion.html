@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script>
+
+		function post()
+		{
+			if(document.getElementById("content").value!="")
+			{
+				var element = document.createElement("div");
+
+				var un = document.createElement("text");
+				un.style = "font-weight: bold; font-size: 17px";
+				un.innerHTML = "Nisarg20";
+
+				var dnt = document.createElement("text");
+				dnt.style = "font-size: 13px";
+				dnt.innerHTML = "posted on date and time";
+
+				var b = document.createElement("br");
+
+				var txt = document.createElement("p")
+				txt.innerHTML = document.getElementById("content").value;
+				txt.style="background-color : white;"
+
+
+				element.appendChild(un);
+				element.appendChild(b);
+				element.appendChild(dnt);
+				element.appendChild(txt);
+				element.append(txt);
+				var nc = document.getElementById("fooBar");
+				nc.prepend(element);
+				document.getElementById("content").value = "";
+			}
+		}
+
+	</script>
+	<style>
+		input{
+			height:30px;
+			font-size:17px;
+			width:250px;
+		}
+		.button{
+			width:60px;
+			height:35px;
+			vertical-align: middle;
+		}
+		div{
+			background-color: #E2EBF4;
+			padding : 10px;
+			margin: 20px;
+		}
+
+	</style>
+
+</head>
+<body>
+
+<div id="d">
+	<textarea rows="3" cols="50" id="content" placeholder="Enter your comment"></textarea>
+	<br>
+	<button class="button" onclick="post()">Post</button>
+</div>
+<span id="fooBar">
+
+			<div>
+				<text style="font-weight: bold; font-size: 17px">Nisarg20</text>
+				</br>
+				<text style="font-size: 13px">Date and Time</text>
+				<p style="background-color : white;">Comment<br>asdfad</p>
+			</div>
+	</span>
+
+</body>
+
+
+</html>

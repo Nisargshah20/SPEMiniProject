@@ -28,6 +28,8 @@ public class ProblemController {
         ModelAndView model = new ModelAndView("problem");
         session.setAttribute("id",id);
         model.addObject("pid",id);
+        File file = new File(getClass().getClassLoader().getResource("static/Problems/1/input.txt").getFile());
+        System.out.print(file.getAbsolutePath());
         return model;
     }
 
@@ -57,12 +59,13 @@ public class ProblemController {
         String ue_path = username + "/" + id + "/usererror.txt";
         String uo_path = username + "/" + id + "/useroutput.txt";
         String ucode_path = username + "/" + id + "/userprogram.cpp";
-        String i_path = "classes/static/Problems/" + id + "/input.txt";
-        String o_path = "classes/static/Problems/" + id + "/output.txt";
-        file = new File(uo_path);
-        file = new File(ue_path);
+        String i_path = "static/Problems/" + id + "/input.txt";
+        String o_path = "static/Problems/" + id + "/output.txt";
+        file = new File(getClass().getClassLoader().getResource(i_path).getFile());
+        file = new File(getClass().getClassLoader().getResource(o_path).getFile());
+        File test1 =   new File(getClass().getClassLoader().getResource("test.sh").getFile());
 
-        String[] cmd = {"sh", "classes/test.sh", ucode_path, ui_path, ue_path, uo_path};
+        String[] cmd = {"sh", test1.getAbsolutePath(), ucode_path, ui_path, ue_path, uo_path};
         Process p = Runtime.getRuntime().exec(cmd);
         p.waitFor();
         File errorfile = new File(ue_path);
