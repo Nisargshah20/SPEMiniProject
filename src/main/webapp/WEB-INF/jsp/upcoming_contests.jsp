@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="css/home.css"/>
 	<script type="text/javascript" src="js/home.js"></script>
 	<title>
-		Home
+		Upcoming Contest
 	</title>
 </head>
 <body>

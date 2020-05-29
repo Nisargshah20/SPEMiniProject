@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/home.js"></script>
 
     <title>
-        Home
+        Leaderboard
     </title>
     <style>
         tr:first-child

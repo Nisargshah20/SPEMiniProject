@@ -22,7 +22,7 @@
 		}
 	</script>
 	<title>
-		Home
+		Host Contest
 	</title>
 </head>
 <body>
