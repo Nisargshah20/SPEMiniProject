@@ -11,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 @RestController
@@ -20,7 +19,7 @@ public class ProblemController {
     Gson gson = new Gson();
 
     @RequestMapping(value = {"/problems"})
-    public ModelAndView problem(@RequestParam(value = "id") String id, HttpSession session, RedirectAttributes redirectAttributes){
+    public ModelAndView problem(@RequestParam(value = "id") String id, HttpSession session, RedirectAttributes redirectAttributes) throws IOException {
         if(session.getAttribute("username")==null){
             ModelAndView model = new ModelAndView("redirect:index");
             redirectAttributes.addFlashAttribute("result","Can't access the page you requested need to Login first");
@@ -29,12 +28,8 @@ public class ProblemController {
         ModelAndView model = new ModelAndView("problem");
         session.setAttribute("id",id);
         model.addObject("pid",id);
-        String current_dir_path = Paths.get("").toAbsolutePath().toString();
-        System.out.print(current_dir_path);
         return model;
     }
-
-
 
     @RequestMapping(value = "/test",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     public String OnTest(@RequestBody Test test) throws IOException, InterruptedException {
@@ -62,10 +57,12 @@ public class ProblemController {
         String ue_path = username + "/" + id + "/usererror.txt";
         String uo_path = username + "/" + id + "/useroutput.txt";
         String ucode_path = username + "/" + id + "/userprogram.cpp";
-        String i_path = "Problems/" + id + "/input";
-        String o_path = "Problems/" + id + "/output";
+        String i_path = "classes/static/Problems/" + id + "/input.txt";
+        String o_path = "classes/static/Problems/" + id + "/output.txt";
+        file = new File(uo_path);
+        file = new File(ue_path);
 
-        String[] cmd = {"sh", "test.sh", ucode_path, ui_path, ue_path, uo_path};
+        String[] cmd = {"sh", "classes/test.sh", ucode_path, ui_path, ue_path, uo_path};
         Process p = Runtime.getRuntime().exec(cmd);
         p.waitFor();
         File errorfile = new File(ue_path);
@@ -108,11 +105,11 @@ public class ProblemController {
         String username = test.getUsername();
         String id = test.getPid();
         System.out.println(username);
-        String path = "./src/main/resources/" + username;
+        String path = username;
         File file = new File(path);
         if (!file.exists())
             file.mkdir();
-        path = "./src/main/resources/" + username + '/' + id;
+        path = username + '/' + id;
         file = new File(path);
         if (!file.exists())
             file.mkdir();
@@ -125,14 +122,16 @@ public class ProblemController {
         writer.write(test.getInput());
         writer.close();
 
-        String ui_path = "src/main/resources/" + username + "/" + id + "/userinput.txt";
-        String ue_path = "src/main/resources/" + username + "/" + id + "/usererror.txt";
-        String uo_path = "src/main/resources/" + username + "/" + id + "/useroutput.txt";
-        String ucode_path = "src/main/resources/" + username + "/" + id + "/userprogram.cpp";
-        String i_path = "src/main/resources/static/Problems/" + id + "/input.txt";
-        String o_path = "src/main/resources/static/Problems/" + id + "/output.txt";
+        String ui_path = username + "/" + id + "/userinput.txt";
+        String ue_path = username + "/" + id + "/usererror.txt";
+        String uo_path = username + "/" + id + "/useroutput.txt";
+        String ucode_path = username + "/" + id + "/userprogram.cpp";
+        String i_path = "classes/static/Problems/" + id + "/input.txt";
+        String o_path = "classes/static/Problems/" + id + "/output.txt";
+        file = new File(uo_path);
+        file = new File(ue_path);
 
-        String[] cmd = {"sh", "test.sh", ucode_path, i_path, ue_path, uo_path};
+        String[] cmd = {"sh", "classes/test.sh", ucode_path, i_path, ue_path, uo_path};
         Process p = Runtime.getRuntime().exec(cmd);
         p.waitFor();
         File errorfile = new File(ue_path);

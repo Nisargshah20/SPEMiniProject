@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="css/home.css"/>
 	<script type="text/javascript" src="js/home.js"></script>
 	<title>
-		Home
+		Upcoming Contest
 	</title>
 </head>
 <body>
@@ -21,6 +21,8 @@
 	<a id="discussion" href="discussion" >Discussion</a>
 	<a id="submitproblem" href="submitproblem" >Create Problem</a>
 	<a id="hostcontest" href="hostcontest">Host Contest</a>
+	<input type="hidden" name="username" id="username" value="${username}">
+
 	<div class="dropdown">
 		<button class="dropbtn">${username}
 			<i class="fa fa-caret-down"></i>

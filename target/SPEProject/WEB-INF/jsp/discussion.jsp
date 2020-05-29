@@ -13,7 +13,7 @@
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
     <title>
-        Home
+        Discussion
     </title>
         <c:if test="${not empty result}">
         <script type="text/javascript">
@@ -21,6 +21,14 @@
                 alert("${result}");
             })
         </script>
+            <script>
+                window.addEventListener("load",function(){
+                    if(document.getElementById("username").value!="nisarg20")
+                    {
+                        document.getElementById("hostcontest").className += "collapse";
+                    }
+                })
+            </script>
         </c:if>
 </head>
 <body>
@@ -32,6 +40,7 @@
     <a id="discussion" href="discussion" class="active">Discussion</a>
     <a id="submitproblem" href="submitproblem" >Create Problem</a>
     <a id="hostcontest" href="hostcontest">Host Contest</a>
+    <input type="hidden" name="username" id="username" value="${username}">
     <div class="dropdown">
         <button class="dropbtn">${username}
             <i class="fa fa-caret-down"></i>

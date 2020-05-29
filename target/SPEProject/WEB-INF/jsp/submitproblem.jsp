@@ -9,18 +9,19 @@
     <link rel="stylesheet" type="text/css" href="css/home.css"/>
     <script type="text/javascript" src="js/home.js"></script>
     <title>
-        Home
+        Submit Problem
     </title>
 </head>
 <body>
 
 <div class="topnav">
     <a id="problems_list" href="home">Problems</a>
-    <a id="upcoming_contests.html" href="upcoming_contests">Upcoming Contests</a>
+    <a id="upcoming_contests" href="upcoming_contests">Upcoming Contests</a>
     <a id="leaderboard" href="leaderboard"> Leaderboard</a>
-    <a id="discussion.html" href="discussion" >Discussion</a>
-    <a id="submitproblem.html" href="submitproblem" class="active">Create Problem</a>
-    <a id="hostcontest.html" href="hostcontest">Host Contest</a>
+    <a id="discussion" href="discussion" >Discussion</a>
+    <a id="submitproblem" href="submitproblem" class="active">Create Problem</a>
+    <a id="hostcontest" href="hostcontest">Host Contest</a>
+    <input type="hidden" name="username" id="username" value="${username}">
     <div class="dropdown">
         <button class="dropbtn">${username}
             <i class="fa fa-caret-down"></i>

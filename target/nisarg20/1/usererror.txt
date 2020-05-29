@@ -1,0 +1,7 @@
+nisarg20/1/userprogram.cpp: In function ‘bool kLengthApart(std::vector<int>&, int)’:
+nisarg20/1/userprogram.cpp:9:9: error: expected ‘,’ or ‘;’ before ‘for’
+         for(int i=0;i<nums.size();i++)
+         ^~~
+nisarg20/1/userprogram.cpp:9:21: error: ‘i’ was not declared in this scope
+         for(int i=0;i<nums.size();i++)
+                     ^

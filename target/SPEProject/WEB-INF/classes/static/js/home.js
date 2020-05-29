@@ -8,3 +8,10 @@ function myfun(v)
     document.getElementById(current).className = "inactive";
 	current = v;
 }
+
+window.addEventListener("load",function(){
+	if(document.getElementById("username").value!="nisarg20")
+	{
+		document.getElementById("hostcontest").className += "collapse";
+	}
+})

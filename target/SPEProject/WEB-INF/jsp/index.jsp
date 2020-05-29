@@ -23,7 +23,11 @@
     <style type="text/css">
         body
         {
-            background: #3A526F;
+            background : url("coding.jpg") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
         }
         .login-form {
             width: 340px;
