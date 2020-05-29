@@ -8,21 +8,22 @@ pipeline {
   stages {
     stage('Clean') {
         steps{
-        logstash{
+           logstash{
              sh 'mvn clean'
              echo "clean"
-        }
+           }
         }
     }
 
     stage('Compile') {
         steps{
-        logstash{
+           logstash{
              sh 'mvn package'
              echo "compile"
-        }
+           }
         }
     }
+
     stage('Test') {
         steps{
            logstash{
@@ -34,19 +35,18 @@ pipeline {
 
     stage('Deploy Image to Docker Hub') {
         steps{
-        logstash{
+          logstash{
             script{
-
                dockerImage = docker.build registry + ":spe"
                docker.withRegistry( '', registryCredential){
                    dockerImage.push()
                }
             }
-        }
+          }
         }
     }
      stage('Execute Rundeck job') {
-             steps {
+         steps {
              logstash{
                script {
                  step([$class: "RundeckNotifier",
@@ -57,9 +57,8 @@ pipeline {
                        shouldWaitForRundeckJob: true,
                        tailLog: true])
                }
-               }
              }
-    }
-
+         }
+     }
   }
-  }
+}
