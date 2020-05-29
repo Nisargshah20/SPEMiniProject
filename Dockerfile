@@ -1,5 +1,5 @@
 FROM openjdk
 EXPOSE 8085
-ADD target/SPEProject.war SPEProject.war
+COPY target/SPEProject.war /home
 WORKDIR /home
-ENTRYPOINT ["java" , "-jar" , "SPEProject.war"]
+CMD ["java" , "-jar" , "SPEProject.war"]
