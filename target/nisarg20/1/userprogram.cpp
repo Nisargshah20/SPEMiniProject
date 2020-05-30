@@ -1,2 +1,8 @@
+#include<iostream>
+using namespace std;
 
-    //Your Code goes here
+int main(){
+    int t;
+    cin>>t;
+    
+}

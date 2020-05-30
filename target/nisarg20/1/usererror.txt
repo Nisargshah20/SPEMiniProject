@@ -1,0 +1,4 @@
+nisarg20/1/userprogram.cpp: In function ‘int main()’:
+nisarg20/1/userprogram.cpp:6:1: error: expected initializer before ‘}’ token
+ }
+ ^
