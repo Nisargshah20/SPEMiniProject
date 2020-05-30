@@ -132,17 +132,27 @@ public class ProblemController {
         writer = new FileWriter(input);
         writer.write(test.getInput());
         writer.close();
-
+        File file1 = new File(path + '/' + "useroutput.txt");
+        file1.createNewFile();
+        File file2 = new File(path + '/' + "usererror.txt");
+        file2.createNewFile();
         String ui_path = username + "/" + id + "/userinput.txt";
         String ue_path = username + "/" + id + "/usererror.txt";
         String uo_path = username + "/" + id + "/useroutput.txt";
         String ucode_path = username + "/" + id + "/userprogram.cpp";
-        String i_path = "classes/static/Problems/" + id + "/input.txt";
-        String o_path = "classes/static/Problems/" + id + "/output.txt";
-        file = new File(uo_path);
-        file = new File(ue_path);
+        String i_path = "static/Problems/" + id + "/input.txt";
+        String o_path = "static/Problems/" + id + "/output.txt";
+        i_path = getClass().getClassLoader().getResource(i_path).getPath();
+        o_path = getClass().getClassLoader().getResource(o_path).getPath();
+        String test1 =  getClass().getClassLoader().getResource("test.sh").getPath();
 
-        String[] cmd = {"sh", "classes/test.sh", ucode_path, i_path, ue_path, uo_path};
+        uo_path = file1.getPath();
+        ue_path = file2.getPath();
+        ui_path = input.getPath();
+        ucode_path = code.getPath();
+        System.out.print(test1 + ue_path + ui_path +uo_path + ucode_path);
+
+        String[] cmd = {"sh", test1, ucode_path, i_path, ue_path, uo_path};
         Process p = Runtime.getRuntime().exec(cmd);
         p.waitFor();
         File errorfile = new File(ue_path);
